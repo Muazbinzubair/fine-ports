@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Modern Apparel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* CSS Custom Properties */
+:root {
+    --primary-black: #1A1A1A;
+    --soft-white: #F8F8F8;
+    --modern-blue: #007AFF;
+    --charcoal-text: #333333;
+    --vibrant-orange: #FF6B35;
+    --pure-white: #FFFFFF;
+    --light-gray: #E5E5E5;
+    --medium-gray: #999999;
+    --dark-gray: #666666;
+    
+    --font-primary: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    --border-radius: 12px;
+    --border-radius-small: 8px;
+    --border-radius-large: 20px;
+    
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.12);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--charcoal-text);
+    background-color: var(--pure-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Navigation */
+.navbar {
+    background: var(--pure-white);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--light-gray);
+    transition: var(--transition-normal);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-brand .brand-text {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-black);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+}
+
+.nav-link {
+    color: var(--charcoal-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-fast);
+    position: relative;
+    padding: var(--spacing-sm) 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--modern-blue);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--modern-blue);
+    border-radius: 1px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.search-toggle,
+.search-close {
+    background: none;
+    border: none;
+    color: var(--charcoal-text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-small);
+    transition: var(--transition-fast);
+}
+
+.search-toggle:hover,
+.search-close:hover {
+    background: var(--soft-white);
+}
+
+.cart-link {
+    position: relative;
+    color: var(--charcoal-text);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-small);
+    transition: var(--transition-fast);
+}
+
+.cart-link:hover {
+    background: var(--soft-white);
+}
+
+.cart-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--vibrant-orange);
+    color: var(--pure-white);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-semibold);
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Search Container */
+.search-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--pure-white);
+    border-bottom: 1px solid var(--light-gray);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition-normal);
+}
+
+.search-container.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: var(--soft-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 2px var(--modern-blue);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: var(--spacing-xxl) 0;
+    margin-top: 80px;
+    background: linear-gradient(135deg, var(--soft-white) 0%, var(--pure-white) 100%);
+}
+
+.hero-content {
+    flex: 1;
+    padding: 0 var(--spacing-lg);
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-black);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: -2px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--dark-gray);
+    margin-bottom: var(--spacing-xl);
+    font-weight: var(--font-weight-light);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--modern-blue);
+    color: var(--pure-white);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.1rem;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.cta-button:hover {
+    background: #0056CC;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hero-image {
+    flex: 1;
+    padding: 0 var(--spacing-lg);
+}
+
+.hero-img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Features Section */
+.features {
+    padding: var(--spacing-xxl) 0;
+    background: var(--pure-white);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.feature-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--soft-white);
+    border-radius: var(--border-radius);
+    transition: var(--transition-normal);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: var(--modern-blue);
+    color: var(--pure-white);
+    border-radius: 50%;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-card p {
+    color: var(--dark-gray);
+    font-weight: var(--font-weight-light);
+}
+
+/* Categories Section */
+.categories {
+    padding: var(--spacing-xxl) 0;
+    background: var(--soft-white);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -1px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    font-weight: var(--font-weight-light);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.category-card {
+    position: relative;
+    height: 400px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.category-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-slow);
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.05);
+}
+
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: var(--pure-white);
+    padding: var(--spacing-xl);
+    text-align: center;
+}
+
+.category-overlay h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.category-overlay p {
+    font-weight: var(--font-weight-light);
+    opacity: 0.9;
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: var(--spacing-xxl) 0;
+    background: var(--primary-black);
+    color: var(--pure-white);
+}
+
+.newsletter-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-content h2 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -1px;
+}
+
+.newsletter-content p {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.8;
+    font-weight: var(--font-weight-light);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: var(--spacing-sm);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-small);
+    font-size: 1rem;
+    outline: none;
+}
+
+.newsletter-button {
+    background: var(--modern-blue);
+    color: var(--pure-white);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-small);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+
+.newsletter-button:hover {
+    background: #0056CC;
+}
+
+/* Page Header */
+.page-header {
+    padding: 120px 0 var(--spacing-xxl);
+    background: var(--soft-white);
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -1px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    font-weight: var(--font-weight-light);
+}
+
+/* Shop Styles */
+.shop-content {
+    padding: var(--spacing-xxl) 0;
+}
+
+.shop-filters {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--soft-white);
+    border-radius: var(--border-radius);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.filter-group label {
+    font-weight: var(--font-weight-medium);
+    color: var(--charcoal-text);
+    white-space: nowrap;
+}
+
+.filter-select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-small);
+    background: var(--pure-white);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.filter-select:focus {
+    border-color: var(--modern-blue);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.product {
+    background: var(--pure-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--light-gray);
+}
+
+.product:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.product img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: var(--transition-slow);
+}
+
+.product:hover img {
+    transform: scale(1.02);
+}
+
+.product-info {
+    padding: var(--spacing-lg);
+}
+
+.product h4 {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--modern-blue);
+    margin-bottom: var(--spacing-md);
+}
+
+.product button {
+    width: 100%;
+    background: var(--primary-black);
+    color: var(--pure-white);
+    border: none;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-small);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.product button:hover {
+    background: #333333;
+}
+
+/* Cart Styles */
+.cart-content {
+    padding: var(--spacing-xxl) 0;
+}
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xxl);
+}
+
+.cart-items-section {
+    background: var(--pure-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.cart-header h2 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-black);
+}
+
+.clear-cart-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: none;
+    border: 1px solid var(--light-gray);
+    color: var(--dark-gray);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.clear-cart-btn:hover {
+    background: var(--soft-white);
+    color: var(--charcoal-text);
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: var(--font-weight-medium);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-xs);
+}
+
+.cart-item-price {
+    color: var(--modern-blue);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.quantity-btn {
+    background: var(--soft-white);
+    border: 1px solid var(--light-gray);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.quantity-btn:hover {
+    background: var(--light-gray);
+}
+
+.cart-summary {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.summary-card {
+    background: var(--pure-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.summary-card h3 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-lg);
+}
+
+.summary-details {
+    margin-bottom: var(--spacing-lg);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.summary-row:last-child {
+    margin-bottom: 0;
+}
+
+.total-row {
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--light-gray);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.1rem;
+}
+
+.free-shipping {
+    color: var(--vibrant-orange);
+    font-weight: var(--font-weight-medium);
+}
+
+.checkout-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.checkout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    background: var(--modern-blue);
+    color: var(--pure-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.1rem;
+    transition: var(--transition-normal);
+}
+
+.checkout-btn:hover {
+    background: #0056CC;
+}
+
+.continue-shopping {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    color: var(--dark-gray);
+    text-decoration: none;
+    padding: var(--spacing-sm);
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-fast);
+}
+
+.continue-shopping:hover {
+    color: var(--charcoal-text);
+}
+
+/* Checkout Styles */
+.checkout-content {
+    padding: var(--spacing-xxl) 0;
+}
+
+.checkout-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xxl);
+}
+
+.checkout-form-section {
+    background: var(--pure-white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.checkout-steps {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+}
+
+.step.active {
+    color: var(--modern-blue);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--light-gray);
+    color: var(--medium-gray);
+    border-radius: 50%;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.8rem;
+}
+
+.step.active .step-number {
+    background: var(--modern-blue);
+    color: var(--pure-white);
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-section h3 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.form-group label {
+    font-weight: var(--font-weight-medium);
+    color: var(--charcoal-text);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    padding: var(--spacing-md);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius-small);
+    font-size: 1rem;
+    background: var(--pure-white);
+    transition: var(--transition-fast);
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--modern-blue);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
+}
+
+.form-actions {
+    margin-top: var(--spacing-lg);
+}
+
+.place-order-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    background: var(--modern-blue);
+    color: var(--pure-white);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.place-order-btn:hover {
+    background: #0056CC;
+}
+
+.checkout-message {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-small);
+    font-weight: var(--font-weight-medium);
+    display: none;
+}
+
+.checkout-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.checkout-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.order-summary {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.order-items {
+    margin-bottom: var(--spacing-lg);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-name {
+    font-weight: var(--font-weight-medium);
+    color: var(--primary-black);
+    font-size: 0.9rem;
+}
+
+.order-item-price {
+    color: var(--modern-blue);
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.9rem;
+}
+
+.security-info {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--light-gray);
+}
+
+.security-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--primary-black);
+    color: var(--pure-white);
+    padding: var(--spacing-xxl) 0 var(--spacing-lg);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-section h4 {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--font-weight-light);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-section ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.footer-section ul li a:hover {
+    color: var(--pure-white);
+}
+
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--pure-white);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.social-links a:hover {
+    background: var(--modern-blue);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+/* Empty States */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--medium-gray);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--light-gray);
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--dark-gray);
+}
+
+.empty-state p {
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-light);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .cart-layout,
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .nav-container {
+        padding: var(--spacing-md);
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .shop-filters {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}
+
+/* Loading States */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    color: var(--medium-gray);
+}
+
+.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--light-gray);
+    border-top: 2px solid var(--modern-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: var(--spacing-sm);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.hidden { display: none; }
+.visible { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+</style>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-text">MODERN</a>
+            </div>
+            <div class="nav-menu">
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="search-toggle"><i class="fas fa-search"></i></button>
+                <a href="cart.html" class="cart-link"><i class="fas fa-shopping-bag"></i><span class="cart-count">3</span></a>
+            </div>
+        </div>
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="Search products...">
+                <button class="search-close"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Our Story</h1>
+            <p>Discover the passion and purpose behind MODERN</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="about-section" style="padding: var(--spacing-xxl) 0;">
+            <div class="about-intro" style="margin-bottom: var(--spacing-xxl); text-align: center;">
+                <h2 style="margin-bottom: var(--spacing-md);">Redefining Modern Fashion</h2>
+                <p style="max-width: 700px; margin: 0 auto; color: var(--dark-gray);">Founded in 2015, MODERN was born from a simple idea: to create timeless, high-quality clothing that combines minimalist design with sustainable practices.</p>
+            </div>
+
+            <div class="about-mission" style="margin-bottom: var(--spacing-xxl);">
+                <div class="mission-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-xl); align-items: center;">
+                    <div class="mission-image" style="border-radius: var(--border-radius-large); overflow: hidden; box-shadow: var(--shadow-lg);">
+                        <img src="https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Our Team" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    <div class="mission-content">
+                        <h2 style="margin-bottom: var(--spacing-lg);">Our Mission</h2>
+                        <p style="color: var(--dark-gray); margin-bottom: var(--spacing-md);">At MODERN, we believe fashion should be both beautiful and responsible. We're committed to:</p>
+                        <ul style="list-style-position: inside; margin-bottom: var(--spacing-md); color: var(--dark-gray);">
+                            <li style="margin-bottom: var(--spacing-sm);">Creating thoughtfully designed, versatile pieces</li>
+                            <li style="margin-bottom: var(--spacing-sm);">Using sustainable materials and ethical production</li>
+                            <li style="margin-bottom: var(--spacing-sm);">Reducing waste throughout our supply chain</li>
+                            <li>Building a community around conscious consumption</li>
+                        </ul>
+                        <p style="color: var(--dark-gray);">Every piece in our collection is designed to last, transcending seasonal trends while minimizing environmental impact.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-values" style="margin-bottom: var(--spacing-xxl);">
+                <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Our Core Values</h2>
+                <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-xl);">
+                    <div class="value-card" style="background: var(--soft-white); padding: var(--spacing-xl); border-radius: var(--border-radius); text-align: center;">
+                        <div class="value-icon" style="font-size: 2.5rem; color: var(--modern-blue); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-sm);">Sustainability</h3>
+                        <p style="color: var(--dark-gray);">We prioritize eco-friendly materials and processes at every stage, from design to delivery.</p>
+                    </div>
+                    <div class="value-card" style="background: var(--soft-white); padding: var(--spacing-xl); border-radius: var(--border-radius); text-align: center;">
+                        <div class="value-icon" style="font-size: 2.5rem; color: var(--modern-blue); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-sm);">Quality</h3>
+                        <p style="color: var(--dark-gray);">Each garment is crafted with premium materials and attention to detail for lasting wear.</p>
+                    </div>
+                    <div class="value-card" style="background: var(--soft-white); padding: var(--spacing-xl); border-radius: var(--border-radius); text-align: center;">
+                        <div class="value-icon" style="font-size: 2.5rem; color: var(--modern-blue); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-sm);">Ethics</h3>
+                        <p style="color: var(--dark-gray);">We partner with factories that ensure fair wages and safe working conditions.</p>
+                    </div>
+                    <div class="value-card" style="background: var(--soft-white); padding: var(--spacing-xl); border-radius: var(--border-radius); text-align: center;">
+                        <div class="value-icon" style="font-size: 2.5rem; color: var(--modern-blue); margin-bottom: var(--spacing-md);">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-sm);">Innovation</h3>
+                        <p style="color: var(--dark-gray);">We continuously explore new ways to reduce our environmental footprint.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-team" style="margin-bottom: var(--spacing-xxl);">
+                <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Meet Our Team</h2>
+                <div class="team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-xl);">
+                    <div class="team-member" style="text-align: center;">
+                        <div class="member-photo" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto var(--spacing-md); box-shadow: var(--shadow-md);">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Alex Johnson" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-xs);">Alex Johnson</h3>
+                        <p style="color: var(--medium-gray); margin-bottom: var(--spacing-sm);">Founder & CEO</p>
+                        <p style="color: var(--dark-gray);">With a background in sustainable design, Alex launched MODERN to prove fashion can be both stylish and responsible.</p>
+                    </div>
+                    <div class="team-member" style="text-align: center;">
+                        <div class="member-photo" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto var(--spacing-md); box-shadow: var(--shadow-md);">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Sarah Chen" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-xs);">Sarah Chen</h3>
+                        <p style="color: var(--medium-gray); margin-bottom: var(--spacing-sm);">Creative Director</p>
+                        <p style="color: var(--dark-gray);">Sarah brings her minimalist aesthetic and technical expertise to every collection we create.</p>
+                    </div>
+                    <div class="team-member" style="text-align: center;">
+                        <div class="member-photo" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto var(--spacing-md); box-shadow: var(--shadow-md);">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Marcus Lee" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-xs);">Marcus Lee</h3>
+                        <p style="color: var(--medium-gray); margin-bottom: var(--spacing-sm);">Head of Sustainability</p>
+                        <p style="color: var(--dark-gray);">Marcus ensures our materials and processes meet the highest environmental standards.</p>
+                    </div>
+                    <div class="team-member" style="text-align: center;">
+                        <div class="member-photo" style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto var(--spacing-md); box-shadow: var(--shadow-md);">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Taylor Smith" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <h3 style="margin-bottom: var(--spacing-xs);">Taylor Smith</h3>
+                        <p style="color: var(--medium-gray); margin-bottom: var(--spacing-sm);">Customer Experience</p>
+                        <p style="color: var(--dark-gray);">Taylor leads our team in delivering exceptional service at every customer touchpoint.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-sustainability" style="background: var(--primary-black); color: var(--pure-white); padding: var(--spacing-xxl); border-radius: var(--border-radius); margin-bottom: var(--spacing-xxl);">
+                <div class="sustainability-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Our Sustainability Commitment</h2>
+                    <p style="margin-bottom: var(--spacing-xl); opacity: 0.8;">We're on a mission to transform the fashion industry through responsible practices that protect people and the planet.</p>
+                    <div class="sustainability-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--spacing-xl);">
+                        <div class="stat-item">
+                            <div class="stat-number" style="font-size: 2.5rem; font-weight: var(--font-weight-bold); margin-bottom: var(--spacing-sm); color: var(--modern-blue);">85%</div>
+                            <p style="opacity: 0.8;">of materials are organic or recycled</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" style="font-size: 2.5rem; font-weight: var(--font-weight-bold); margin-bottom: var(--spacing-sm); color: var(--modern-blue);">100%</div>
+                            <p style="opacity: 0.8;">carbon neutral shipping</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" style="font-size: 2.5rem; font-weight: var(--font-weight-bold); margin-bottom: var(--spacing-sm); color: var(--modern-blue);">60%</div>
+                            <p style="opacity: 0.8;">less water used in production</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" style="font-size: 2.5rem; font-weight: var(--font-weight-bold); margin-bottom: var(--spacing-sm); color: var(--modern-blue);">2025</div>
+                            <p style="opacity: 0.8;">zero waste goal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-cta" style="text-align: center;">
+                <h2 style="margin-bottom: var(--spacing-lg);">Join Our Community</h2>
+                <p style="max-width: 600px; margin: 0 auto var(--spacing-xl); color: var(--dark-gray);">Sign up for our newsletter to receive updates on new collections, sustainability initiatives, and exclusive offers.</p>
+                <form class="newsletter-form" style="display: flex; gap: var(--spacing-sm); max-width: 400px; margin: 0 auto;">
+                    <input type="email" placeholder="Your email address" style="flex: 1; padding: var(--spacing-md); border: 1px solid var(--light-gray); border-radius: var(--border-radius-small); font-size: 1rem; outline: none;">
+                    <button type="submit" style="background: var(--modern-blue); color: var(--pure-white); border: none; padding: var(--spacing-md) var(--spacing-lg); border-radius: var(--border-radius-small); font-weight: var(--font-weight-semibold); cursor: pointer; transition: var(--transition-fast); white-space: nowrap;">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MODERN</h3>
+                    <p>Elevating everyday essentials with thoughtful design and sustainable practices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Collections</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MODERN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+   <script src="script.js"></script>
+    <script>
+        // Search toggle functionality
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchClose = document.querySelector('.search-close');
+        const searchContainer = document.querySelector('.search-container');
+        
+        searchToggle.addEventListener('click', () => {
+            searchContainer.classList.add('active');
+        });
+        
+        searchClose.addEventListener('click', () => {
+            searchContainer.classList.remove('active');
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            newsletterForm.reset();
+        });
+    </script>
+    <script src="cart.js"></script>
+<script src="notifications.js"></script>
+<script src="productFunctions.js"></script>
+<script src="script.js"></script>
+<script src="products.js"></script>
+<script src="productFunctions.js"></script>
+</body>
+</html>

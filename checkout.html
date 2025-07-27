@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - FinePort</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-text">FinePort</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+            </div>
+            <div class="nav-actions">
+                <button class="search-toggle" id="searchToggle">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="cart.html" class="cart-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+        <div class="search-container" id="searchContainer">
+            <div class="search-wrapper">
+                <input type="text" id="searchBar" placeholder="Search products..." class="search-input">
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Checkout</h1>
+            <p>Complete your order</p>
+        </div>
+    </section>
+
+    <!-- Checkout Content -->
+    <section class="checkout-content">
+        <div class="container">
+            <div class="checkout-layout">
+                <div class="checkout-form-section">
+                    <div class="checkout-steps">
+                        <div class="step active" id="step1">
+                            <div class="step-number">1</div>
+                            <span>Customer Information</span>
+                        </div>
+                        <div class="step" id="step2">
+                            <div class="step-number">2</div>
+                            <span>Payment</span>
+                        </div>
+                        <div class="step" id="step3">
+                            <div class="step-number">3</div>
+                            <span>Confirmation</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Customer Information -->
+                    <form id="customerInfoForm" class="checkout-form" style="display: block;">
+                        <div class="form-section">
+                            <h3>Contact Information</h3>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Shipping Address</h3>
+                            <div class="form-group">
+                                <label for="address">Street Address</label>
+                                <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city" placeholder="City" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" placeholder="State" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zip">ZIP Code</label>
+                                    <input type="text" id="zip" name="zip" placeholder="ZIP" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="continueToPaymentBtn" class="place-order-btn">
+                                <span>Continue to Payment</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Step 2: Payment Method -->
+                    <div id="paymentMethodSection" class="checkout-form" style="display: none;">
+                        <div class="form-section">
+                            <h3>Select Payment Method</h3>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" id="jazzcash" name="paymentMethod" value="jazzcash" checked>
+                                    <label for="jazzcash">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <span>JazzCash</span>
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="cod" name="paymentMethod" value="cod">
+                                    <label for="cod">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        <span>Cash on Delivery</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="backToInfoBtn" class="place-order-btn" style="background: var(--light-gray); color: var(--charcoal-text); margin-right: var(--spacing-md);">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                            <button type="button" id="continueToConfirmBtn" class="place-order-btn">
+                                <span>Continue to Confirmation</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Order Confirmation -->
+                    <div id="orderConfirmationSection" class="checkout-form" style="display: none;">
+                        <div class="form-section">
+                            <h3>Order Summary</h3>
+                            <div id="confirmationItems"></div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Shipping Information</h3>
+                            <div id="shippingInfo"></div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Payment Method</h3>
+                            <div id="paymentInfo"></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="backToPaymentBtn" class="place-order-btn" style="background: var(--light-gray); color: var(--charcoal-text); margin-right: var(--spacing-md);">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back</span>
+                            </button>
+                            <button type="button" id="confirmOrderBtn" class="place-order-btn">
+                                <span>Confirm Order</span>
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="checkout-message" id="checkoutMessage">
+                        <!-- Success/Error messages will appear here -->
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        <div class="order-items" id="orderItems">
+                            <!-- Order items will be loaded via JavaScript -->
+                        </div>
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="orderSubtotal">Rs. 0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span class="free-shipping">Free</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span>Total</span>
+                                <span id="orderTotal">Rs. 0.00</span>
+                            </div>
+                        </div>
+                        <div class="security-info">
+                            <div class="security-badge">
+                                <i class="fas fa-lock"></i>
+                                <span>Secure checkout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FinePort</h3>
+                    <p>Premium fashion for the modern lifestyle. Curated collections that define elegance and style.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FinePort. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+    // Update the initialization code to use server cart data
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Load cart from server
+        const cart = await getCart();
+        const orderItemsContainer = document.getElementById('orderItems');
+        const confirmationItemsContainer = document.getElementById('confirmationItems');
+        
+        // Function to display cart items
+        function displayCartItems(container, cart) {
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some items to get started</p>
+                        <a href="shop.html" class="cta-button">Continue Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                html += `
+                    <div class="order-item">
+                        <div class="order-item-info">
+                            <div class="order-item-name">${item.title || item.name} (${item.quantity}x)</div>
+                            ${item.size ? `<div>Size: ${item.size}</div>` : ''}
+                            ${item.color ? `<div>Color: ${item.color}</div>` : ''}
+                        </div>
+                        <div class="order-item-price">Rs. ${itemTotal.toFixed(2)}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            
+            // Update the order summary totals
+            document.getElementById('orderSubtotal').textContent = `Rs. ${subtotal.toFixed(2)}`;
+            document.getElementById('orderTotal').textContent = `Rs. ${subtotal.toFixed(2)}`;
+        }
+
+        // Display items in both sections
+        displayCartItems(orderItemsContainer, cart);
+        displayCartItems(confirmationItemsContainer, cart);
+
+        // Initialize checkout steps
+        initializeCheckout();
+        
+        // Update cart count
+        updateCartCount();
+    });
+
+    // Initialize checkout process
+    function initializeCheckout() {
+        const continueToPaymentBtn = document.getElementById('continueToPaymentBtn');
+        const backToInfoBtn = document.getElementById('backToInfoBtn');
+        const continueToConfirmBtn = document.getElementById('continueToConfirmBtn');
+        const backToPaymentBtn = document.getElementById('backToPaymentBtn');
+        const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+        
+        // Step 1: Customer Information to Payment
+        if (continueToPaymentBtn) {
+            continueToPaymentBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Validate form
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const state = document.getElementById('state').value.trim();
+                const zip = document.getElementById('zip').value.trim();
+                
+                if (!name || !email || !phone || !address || !city || !state || !zip) {
+                    showCheckoutMessage('Please fill in all required fields.', 'error');
+                    return;
+                }
+                
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showCheckoutMessage('Please enter a valid email address.', 'error');
+                    return;
+                }
+                
+                // Proceed to next step if validation passes
+                document.getElementById('customerInfoForm').style.display = 'none';
+                document.getElementById('paymentMethodSection').style.display = 'block';
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+            });
+        }
+        
+        // Step 2: Back to Customer Information
+        if (backToInfoBtn) {
+            backToInfoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('paymentMethodSection').style.display = 'none';
+                document.getElementById('customerInfoForm').style.display = 'block';
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step1').classList.add('active');
+            });
+        }
+        
+        // Step 2: Payment to Confirmation
+        if (continueToConfirmBtn) {
+            continueToConfirmBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                
+                if (!paymentMethod) {
+                    showCheckoutMessage('Please select a payment method.', 'error');
+                    return;
+                }
+                
+                // Update confirmation sections
+                updateConfirmationSections(paymentMethod.value);
+                
+                document.getElementById('paymentMethodSection').style.display = 'none';
+                document.getElementById('orderConfirmationSection').style.display = 'block';
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step3').classList.add('active');
+            });
+        }
+        
+        // Step 3: Back to Payment
+        if (backToPaymentBtn) {
+            backToPaymentBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('orderConfirmationSection').style.display = 'none';
+                document.getElementById('paymentMethodSection').style.display = 'block';
+                document.getElementById('step3').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+            });
+        }
+        
+        // Step 3: Confirm Order
+        if (confirmOrderBtn) {
+            confirmOrderBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const submitButton = document.getElementById('confirmOrderBtn');
+                const originalText = submitButton.innerHTML;
+                
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitButton.disabled = true;
+                
+                try {
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    const address = document.getElementById('address').value.trim();
+                    const city = document.getElementById('city').value.trim();
+                    const state = document.getElementById('state').value.trim();
+                    const zip = document.getElementById('zip').value.trim();
+                    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                    
+                    // Get cart from server
+                    const cartRes = await fetch('/api/cart', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'get', user_id: 'current_user' })
+                    });
+                    const cartData = await cartRes.json();
+                    const cart = cartData.cart || [];
+                    
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    
+                    const orderData = {
+                        customer: {
+                            name,
+                            email,
+                            phone,
+                            address: `${address}, ${city}, ${state}, ${zip}`
+                        },
+                        items: cart,
+                        total,
+                        paymentMethod
+                    };
+                    
+                    // Send order to server
+                    const res = await fetch('/process_order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(orderData)
+                    });
+                    
+                    const result = await res.json();
+                    if (result.success) {
+                        showCheckoutMessage('Order placed successfully! You will receive a confirmation email shortly.', 'success');
+                        
+                        // Clear the cart after successful order
+                        await fetch('/api/cart', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action: 'clear', user_id: 'current_user' })
+                        });
+                        
+                        // Update cart count
+                        updateCartCount();
+                        
+                        // Reset the form
+                        document.getElementById('customerInfoForm').reset();
+                        document.getElementById('orderConfirmationSection').style.display = 'none';
+                        document.getElementById('customerInfoForm').style.display = 'block';
+                        document.getElementById('step3').classList.remove('active');
+                        document.getElementById('step1').classList.add('active');
+                        
+                        // Update cart display
+                        document.getElementById('orderItems').innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Order Placed Successfully</h3>
+                                <p>Thank you for your purchase!</p>
+                            </div>
+                        `;
+                        
+                        document.getElementById('confirmationItems').innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Order Placed Successfully</h3>
+                                <p>Thank you for your purchase!</p>
+                            </div>
+                        `;
+                        
+                    } else {
+                        throw new Error(result.error || "Failed to place order");
+                    }
+                } catch (error) {
+                    console.error('Error placing order:', error);
+                    showCheckoutMessage('An error occurred. Please try again.', 'error');
+                } finally {
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                }
+            });
+        }
+    }
+
+    function updateConfirmationSections(paymentMethod) {
+        const shippingInfo = document.getElementById('shippingInfo');
+        const paymentInfo = document.getElementById('paymentInfo');
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const state = document.getElementById('state').value.trim();
+        const zip = document.getElementById('zip').value.trim();
+        
+        shippingInfo.innerHTML = `
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Address:</strong> ${address}, ${city}, ${state} ${zip}</p>
+        `;
+        
+        paymentInfo.innerHTML = `
+            <p><strong>Payment Method:</strong> ${paymentMethod === 'jazzcash' ? 'JazzCash' : 'Cash on Delivery'}</p>
+        `;
+    }
+
+    function showCheckoutMessage(message, type) {
+        const checkoutMessage = document.getElementById('checkoutMessage');
+        if (checkoutMessage) {
+            checkoutMessage.textContent = message;
+            checkoutMessage.className = `checkout-message ${type}`;
+            checkoutMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                checkoutMessage.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    // Helper function to get cart from server
+    async function getCart() {
+        try {
+            const response = await fetch('/api/cart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'get',
+                    user_id: 'current_user'
+                })
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+                return data.cart || [];
+            }
+            return [];
+        } catch (error) {
+            console.error('Error getting cart:', error);
+            return [];
+        }
+    }
+
+    // Helper function to update cart count
+    async function updateCartCount() {
+        const cart = await getCart();
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById('cartCount');
+        
+        if (cartCount) {
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+    }
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const cart = await getCart(); // from cart.js
+
+    // Step 1: Continue to Payment
+    document.getElementById('continueToPaymentBtn').onclick = () => {
+        document.getElementById('customerInfoForm').style.display = 'none';
+        document.getElementById('paymentMethodSection').style.display = 'block';
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+    };
+
+    // Step 2: Continue to Confirmation
+    document.getElementById('continueToConfirmBtn').onclick = () => {
+        document.getElementById('paymentMethodSection').style.display = 'none';
+        document.getElementById('orderConfirmationSection').style.display = 'block';
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step3').classList.add('active');
+
+        // Display items
+        const itemsHTML = cart.map(item => `
+            <div>
+                ${item.name} (${item.size || ''}, ${item.color || ''}) x${item.quantity} - Rs. ${item.price}
+            </div>
+        `).join('');
+        document.getElementById('confirmationItems').innerHTML = itemsHTML;
+
+        // Display shipping info
+        document.getElementById('shippingInfo').innerHTML = `
+            ${document.getElementById('name').value}<br>
+            ${document.getElementById('phone').value}<br>
+            ${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}, ${document.getElementById('zip').value}
+        `;
+
+        // Payment method
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        document.getElementById('paymentInfo').innerText = paymentMethod === 'cod' ? 'Cash on Delivery' : 'JazzCash';
+    };
+
+    // Step 3: Confirm Order
+    document.getElementById('confirmOrderBtn').onclick = async () => {
+        const customer = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}, ${document.getElementById('zip').value}`,
+        };
+
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        const response = await fetch('/process_order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer: customer,
+                items: cart,
+                total: total
+            })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            document.getElementById('checkoutMessage').innerHTML = '<p class="success">✅ Order placed successfully!</p>';
+            await clearCart();
+        } else {
+            document.getElementById('checkoutMessage').innerHTML = '<p class="error">❌ Failed to place order.</p>';
+        }
+    };
+
+    // Navigation Back
+    document.getElementById('backToInfoBtn').onclick = () => {
+        document.getElementById('paymentMethodSection').style.display = 'none';
+        document.getElementById('customerInfoForm').style.display = 'block';
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.add('active');
+    };
+
+    document.getElementById('backToPaymentBtn').onclick = () => {
+        document.getElementById('orderConfirmationSection').style.display = 'none';
+        document.getElementById('paymentMethodSection').style.display = 'block';
+        document.getElementById('step3').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+    };
+});
+</script>
+<script src="cart.js"></script>
+<script src="notifications.js"></script>
+<script src="productFunctions.js"></script>
+<script src="script.js"></script>
+<script src="products.js"></script>
+<script src="productFunctions.js"></script>
+<script src="script.js"></script>
+<script src="cart.js"></script>
+<script>
+    let checkoutCart = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        checkoutCart = await getCart();
+
+        // Fill order summary
+        const orderItemsDiv = document.getElementById('orderItems');
+        const confirmationItemsDiv = document.getElementById('confirmationItems');
+        const subtotalElem = document.getElementById('orderSubtotal');
+        const totalElem = document.getElementById('orderTotal');
+
+        let subtotal = 0;
+        orderItemsDiv.innerHTML = '';
+        confirmationItemsDiv.innerHTML = '';
+
+        checkoutCart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+
+            const itemHTML = `
+                <div class="order-item">
+                    <div>${item.name} (${item.size}, ${item.color}) x${item.quantity}</div>
+                    <div>Rs. ${itemTotal.toFixed(2)}</div>
+                </div>
+            `;
+            orderItemsDiv.innerHTML += itemHTML;
+            confirmationItemsDiv.innerHTML += itemHTML;
+        });
+
+        subtotalElem.textContent = `Rs. ${subtotal.toFixed(2)}`;
+        totalElem.textContent = `Rs. ${subtotal.toFixed(2)}`;
+        document.getElementById('paymentInfo').textContent = 'JazzCash or Cash on Delivery (selected on page)';
+    });
+
+    document.getElementById('checkoutForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    const orderData = {
+        customer: { name, phone, address },
+        items: cart.map(item => ({
+            title: item.name,
+            quantity: item.quantity,
+            price: item.price
+        })),
+        total: total.toFixed(2)
+    };
+
+    const response = await fetch('/process_order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        alert('Order placed successfully!');
+        localStorage.removeItem('cart');
+        window.location.href = '/'; // Redirect to homepage or thank you
+    } else {
+        alert('Failed to place order: ' + result.error);
+    }
+});
+
+
+    // Buttons
+    document.getElementById('continueToPaymentBtn').onclick = () => {
+        document.getElementById('customerInfoForm').style.display = 'none';
+        document.getElementById('paymentMethodSection').style.display = 'block';
+    };
+
+    document.getElementById('backToInfoBtn').onclick = () => {
+        document.getElementById('customerInfoForm').style.display = 'block';
+        document.getElementById('paymentMethodSection').style.display = 'none';
+    };
+
+    document.getElementById('continueToConfirmBtn').onclick = () => {
+        document.getElementById('paymentMethodSection').style.display = 'none';
+        document.getElementById('orderConfirmationSection').style.display = 'block';
+
+        fetch('/process_order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        customer: {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value
+        },
+        items: JSON.parse(localStorage.getItem('cart') || '[]'),
+        total: parseFloat(document.getElementById('grandTotal').textContent.replace('Rs.', '').trim())
+    })
+})
+.then(res => res.json())
+.then(data => {
+    if (data.success) {
+        alert("✅ Order placed successfully!");
+        localStorage.removeItem('cart');
+        window.location.href = 'index.html';
+    } else {
+        alert("❌ Order failed. Please try again.");
+        console.error(data.error);
+    }
+});
+
+
+        // Show shipping info
+        const shipping = `
+            ${document.getElementById('name').value}<br>
+            ${document.getElementById('phone').value}<br>
+            ${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}, ${document.getElementById('zip').value}
+        `;
+        document.getElementById('shippingInfo').innerHTML = shipping;
+    };
+
+    document.getElementById('backToPaymentBtn').onclick = () => {
+        document.getElementById('orderConfirmationSection').style.display = 'none';
+        document.getElementById('paymentMethodSection').style.display = 'block';
+    };
+
+    document.getElementById('confirmOrderBtn').onclick = async () => {
+        const customer = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value}, ${document.getElementById('zip').value}`
+        };
+        const total = checkoutCart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+        const response = await fetch('/process_order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customer, items: checkoutCart, total })
+        });
+
+        const data = await response.json();
+        const msg = document.getElementById('checkoutMessage');
+        if (data.success) {
+            msg.innerHTML = `<div class="success">✅ Order placed successfully!</div>`;
+            await clearCart();
+        } else {
+            msg.innerHTML = `<div class="error">❌ Failed: ${data.error}</div>`;
+        }
+    };
+</script>
+
+</body>
+</html>
